@@ -31,7 +31,3 @@ const port = process.env.PORT || 4500;
 app.listen(port, () => {
     console.log(`Server running in port ${port}`);
 });
-
-/node_modules
-.env
-.vscode
