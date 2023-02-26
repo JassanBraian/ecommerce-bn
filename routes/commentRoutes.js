@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { isAdmin } = require('../middlewares/isAdmin');
+// const { isAdmin } = require('../middlewares/isAdmin');
 const { restrictTo, protect } = require('../middlewares/userMiddleware')
 const {
   getComments,

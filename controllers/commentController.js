@@ -3,8 +3,8 @@ const Comment = require('../models/Comment.js');
 exports.getComments = async (req, res) => {
     try {
         let comments = [];
-        req.query.prodId ?
-            comments = await Comment.find({ prodId: req.query.prodId })
+        req.query.productId ?
+            comments = await Comment.find({ productId: req.query.productId })
             :
             comments = await Comment.find({});
         return res.status(200).json({ ok: true, comments });
@@ -43,9 +43,6 @@ exports.updateComment = async (req, res) => {
     const { id } = req.params;
     try {
         const comment = await Comment.findById(id);
-        // if (!comment) {
-        //     return res.status(404).json({ ok: false, message: 'Comment not found' });
-        // }
         !comment && res.status(404).json({ ok: false, message: 'Comment not found' });
         const updatedComment = await Comment.findByIdAndUpdate(id, req.body, { new: true });
         return res.status(200).json({ ok: true, comment: updatedComment });

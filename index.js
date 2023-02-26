@@ -7,6 +7,7 @@ const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const saleRoutes = require('./routes/saleRoutes');
 const productRoutes = require('./routes/productRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 
 const cors = require('cors');
 // const { use } = require('./routes/userRoutes');
@@ -25,6 +26,7 @@ app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/sale', saleRoutes);
 app.use('/api/v1/product', productRoutes);
+app.use('/api/v1/comment', commentRoutes);
 
 const port = process.env.PORT || 4500;
 
