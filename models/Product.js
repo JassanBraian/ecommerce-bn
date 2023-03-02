@@ -31,6 +31,10 @@ const productSchema = new Schema({
   },
   category:{
     type: String
+  },
+  isHighligted:{
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true
