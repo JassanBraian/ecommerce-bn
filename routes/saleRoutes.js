@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { restrictTo, protect } = require('../middlewares/userMiddleware');
 const {
-  getSales,
+  getSaleUnpaidByUserLoggedIn,
   createSale,
   updateSale,
   getSaleById
@@ -11,7 +11,7 @@ const router = Router();
 
 router.route('/')
   // .get(protect, getSales)
-  .get(getSales)
+  .get(getSaleUnpaidByUserLoggedIn)
   .post(createSale);
 
 router.route('/:id')

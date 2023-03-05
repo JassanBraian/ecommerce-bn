@@ -1,16 +1,15 @@
 const Sale = require('../models/Sale.js');
 
-exports.getSales = async (req, res) => {
+exports.getSaleUnpaidByUserLoggedIn = async (req, res) => {
     try {
-        const { _id: userid, role } = req.user;
-        let sales = [];
+        //const { _id: userid, role } = req.user;
+        //Luego cambiar id por userId de linea 5
+        const salesUnpaids = await Sale.find({
+            "customer.userid": "631d3a2177caec4746e894e5",
+            "ispaid": false
+        });
 
-        role === 'admin' ?
-            sales = await Sale.find({})
-            :
-            sales = await Sale.find({ "customer.userid": userid });
-
-        return res.status(200).json({ ok: true, sales });
+        return res.status(200).json({ ok: true, sale: salesUnpaids.slice(-1)[0] });
 
     } catch (error) {
         return res.status(500).json({ ok: false, message: 'Error B101' });
