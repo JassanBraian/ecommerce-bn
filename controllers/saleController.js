@@ -1,5 +1,15 @@
 const Sale = require('../models/Sale.js');
 
+exports.getSaleById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const sale = await Sale.findById(id);
+        return res.status(200).json({ ok: true, sale });
+    } catch (error) {
+        return res.status(500).json({ ok: false, message: 'Error B105' });
+    }
+}
+
 exports.getSaleUnpaidByUserLoggedIn = async (req, res) => {
     try {
         //const { _id: userid, role } = req.user;
@@ -16,13 +26,18 @@ exports.getSaleUnpaidByUserLoggedIn = async (req, res) => {
     }
 }
 
-exports.getSaleById = async (req, res) => {
+exports.deleteProductsOfSaleUnpaid = async (req, res) => {
     const { id } = req.params;
     try {
         const sale = await Sale.findById(id);
-        return res.status(200).json({ ok: true, sale });
+        if (!sale)
+            return res.status(404).json({ ok: false, message: 'Sale not found' });
+
+        sale.products = [];
+        const updatedSale = await Sale.findByIdAndUpdate(id, sale, { new: true });
+        return res.status(200).json({ ok: true, sale: updatedSale });
     } catch (error) {
-        return res.status(500).json({ ok: false, message: 'Error B105' });
+        return res.status(500).json({ ok: false, message: 'Error B101' });
     }
 }
 
